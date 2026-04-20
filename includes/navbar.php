@@ -40,10 +40,10 @@
 <div class="sidebar">
     <h2>EventHub CMS</h2>
 
-    <a href="events.php">Events</a>
-    <a href="venues.php">Venues</a>
-    <a href="vendors.php">Vendors</a>
-    <a href="admins.php">Admins</a>
+    <a href="/events/dashboard.php">Events</a>
+    <a href="/venues/dashboard.php">Venues</a>
+    <a href="/vendors/dashboard.php">Vendors</a>
+    <a href="/admin/dashboard.php">Admins</a>
 </div>
 
 <div class="content">
