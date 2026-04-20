@@ -45,28 +45,28 @@
 
     <div class="dashboard-container">
 
-        <a href="events.php" style="text-decoration:none; color:inherit;">
+        <a href="/events/dashboard.php" style="text-decoration:none; color:inherit;">
             <div class="dash-card">
                 <h2>Events</h2>
                 <p>Create, view, edit, and delete events</p>
             </div>
         </a>
 
-        <a href="venues.php" style="text-decoration:none; color:inherit;">
+        <a href="/venues/dashboard.php" style="text-decoration:none; color:inherit;">
             <div class="dash-card">
                 <h2>Venues</h2>
                 <p>Manage event locations and capacity</p>
             </div>
         </a>
 
-        <a href="vendors.php" style="text-decoration:none; color:inherit;">
+        <a href="/vendors/dashboard.php" style="text-decoration:none; color:inherit;">
             <div class="dash-card">
                 <h2>Vendors</h2>
                 <p>Add and update service providers</p>
             </div>
         </a>
 
-        <a href="admins.php" style="text-decoration:none; color:inherit;">
+        <a href="/admins/dashboard.php" style="text-decoration:none; color:inherit;">
             <div class="dash-card">
                 <h2>Admins</h2>
                 <p>Manage admin accounts and permissions</p>
