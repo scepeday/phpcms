@@ -26,8 +26,8 @@ list vendors
 edit vendor
 delete vendor
 
-4. Bookings
-add guest booking
-view bookings
-update booking
-delete booking
+4. Admin
+add admin account
+view accounts
+update accounts
+delete accounts
