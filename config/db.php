@@ -2,8 +2,8 @@
 $host = 'localhost';
 $dbname = 'eventhub-db';
 $user = 'root';
-$password = 'root';
-$port = 8888;
+$password = '';
+$port = 3306;
 
 $db = new mysqli($host, $user, $password, $dbname, $port);
 

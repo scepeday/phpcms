@@ -1,23 +1,31 @@
-<?php include '../includes/header.php'; ?>
-<?php include '../includes/navbar.php'; ?>
-
 <?php
-$query = "SELECT id, email FROM users ORDER BY id DESC";
+$page_title = "Vendor Dashboard";
+include '../includes/header.php';
+
+if (!isset($_SESSION['id'])) {
+    header('Location: ' . app_url('admin/login.php'));
+    exit;
+}
+
+$query = "SELECT id, name, service_type, email, phone FROM vendors ORDER BY id DESC";
 $stmt = $db->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
-$admins = $result->fetch_all(MYSQLI_ASSOC);
+$vendors = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 ?>
 
+<?php include '../includes/navbar.php'; ?>
+
 <style>
-    .admin-layout {
+    .module-layout {
         display: flex;
         min-height: 85vh;
         margin-top: 30px;
         gap: 25px;
     }
 
-    .admin-sidebar {
+    .module-sidebar {
         width: 230px;
         background: #fff;
         border: 1px solid #e5e5e5;
@@ -27,13 +35,13 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         height: fit-content;
     }
 
-    .admin-sidebar h3 {
+    .module-sidebar h3 {
         font-size: 18px;
         margin-bottom: 20px;
         color: #1e1e2f;
     }
 
-    .admin-sidebar a {
+    .module-sidebar a {
         display: block;
         text-decoration: none;
         color: #333;
@@ -44,13 +52,13 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         font-weight: 500;
     }
 
-    .admin-sidebar a:hover,
-    .admin-sidebar a.active {
+    .module-sidebar a:hover,
+    .module-sidebar a.active {
         background: #1e1e2f;
         color: white;
     }
 
-    .admin-main {
+    .module-main {
         flex: 1;
         background: white;
         border: 1px solid #e5e5e5;
@@ -59,7 +67,7 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-    .admin-topbar {
+    .module-topbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -68,13 +76,13 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         gap: 15px;
     }
 
-    .admin-topbar h1 {
+    .module-topbar h1 {
         margin: 0;
         font-size: 28px;
         color: #1e1e2f;
     }
 
-    .admin-topbar p {
+    .module-topbar p {
         margin: 5px 0 0;
         color: #666;
         font-size: 14px;
@@ -97,31 +105,31 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         background: #343456;
     }
 
-    .admin-table-wrapper {
+    .module-table-wrapper {
         overflow-x: auto;
     }
 
-    .admin-table {
+    .module-table {
         width: 100%;
         border-collapse: collapse;
         min-width: 850px;
     }
 
-    .admin-table th,
-    .admin-table td {
+    .module-table th,
+    .module-table td {
         text-align: left;
         padding: 14px 12px;
         border-bottom: 1px solid #eee;
         font-size: 14px;
     }
 
-    .admin-table th {
+    .module-table th {
         background: #f8f9fb;
         color: #1e1e2f;
         font-weight: 600;
     }
 
-    .admin-table tr:hover {
+    .module-table tr:hover {
         background: #fafafa;
     }
 
@@ -150,7 +158,7 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
         color: #dc3545;
     }
 
-    .status-badge {
+    .service-badge {
         display: inline-block;
         padding: 6px 10px;
         border-radius: 20px;
@@ -161,85 +169,81 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
     }
 
     @media (max-width: 900px) {
-        .admin-layout {
+        .module-layout {
             flex-direction: column;
         }
 
-        .admin-sidebar {
+        .module-sidebar {
             width: 100%;
         }
     }
 </style>
 
 <div class="container">
-    <div class="admin-layout">
-
-        <aside class="admin-sidebar">
+    <div class="module-layout">
+        <aside class="module-sidebar">
             <h3>Dashboard</h3>
             <a href="<?= app_url('events/dashboard.php') ?>">Events</a>
             <a href="<?= app_url('venues/dashboard.php') ?>">Venues</a>
-            <a href="<?= app_url('vendors/dashboard.php') ?>">Vendors</a>
-            <a href="<?= app_url('admin/dashboard.php') ?>" class="active">Admins</a>
+            <a href="<?= app_url('vendors/dashboard.php') ?>" class="active">Vendors</a>
+            <a href="<?= app_url('admin/dashboard.php') ?>">Admins</a>
         </aside>
 
-        <main class="admin-main">
-        <div class="admin-topbar">
-            <div>
-                <h1>Admin Dashboard</h1>
-                <p>Manage admins, events, venues, and vendors from one place</p>
+        <main class="module-main">
+            <div class="module-topbar">
+                <div>
+                    <h1>Vendor Dashboard</h1>
+                    <p>Manage service providers for catering, photography, decor, and more</p>
+                </div>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <a href="<?= app_url('vendors/dashboard.php') ?>" class="btn-main" style="background:#6c757d;">
+                        Home
+                    </a>
+
+                    <a href="<?= app_url('vendors/add.php') ?>" class="btn-main">
+                        + Add Vendor
+                    </a>
+                </div>
             </div>
 
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <a href="<?= app_url('admin/dashboard.php') ?>" class="btn-main" style="background:#6c757d;">
-                    Home
-                </a>
-
-                <a href="<?= app_url('admin/add.php') ?>" class="btn-main">
-                    + Add Admin
-                </a>
-
-                <form action="<?= app_url('admin/logout.php') ?>" method="post" style="margin:0;">
-                    <button class="btn-main" style="background:#dc3545;">
-                        Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-
-            <div class="admin-table-wrapper">
-                <table class="admin-table">
+            <div class="module-table-wrapper">
+                <table class="module-table">
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Name</th>
+                            <th>Service</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Phone</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($admins as $admin): ?>
+                        <?php foreach ($vendors as $vendor): ?>
                             <tr>
-                                <td><?= $admin['id'] ?></td>
-                                <td><?= $admin['email'] ?></td>
-                                <td><span class="status-badge">Active</span></td>
+                                <td><?= $vendor['id'] ?></td>
+                                <td><?= htmlspecialchars($vendor['name']) ?></td>
+                                <td><span class="service-badge"><?= htmlspecialchars($vendor['service_type']) ?></span></td>
+                                <td><?= htmlspecialchars($vendor['email']) ?></td>
+                                <td><?= htmlspecialchars($vendor['phone']) ?></td>
                                 <td>
                                     <div class="action-buttons">
-                                        <a href="<?= app_url('admin/edit.php') ?>?id=<?= $admin['id'] ?>" class="btn-sm btn-edit">Edit</a>
-                                        <a href="<?= app_url('admin/delete.php') ?>?id=<?= $admin['id'] ?>" class="btn-sm btn-delete">Delete</a>
+                                        <a href="<?= app_url('vendors/edit.php') ?>?id=<?= $vendor['id'] ?>" class="btn-sm btn-edit">Edit</a>
+                                        <a href="<?= app_url('vendors/delete.php') ?>?id=<?= $vendor['id'] ?>" class="btn-sm btn-delete">Delete</a>
                                     </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
 
-                        <?php if(empty($admins)): ?>
+                        <?php if (empty($vendors)): ?>
                             <tr>
-                                <td colspan="4">No admins found.</td>
+                                <td colspan="6">No vendors found.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
             </div>
-
         </main>
     </div>
 </div>
