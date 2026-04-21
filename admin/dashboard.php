@@ -176,10 +176,10 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
 
         <aside class="admin-sidebar">
             <h3>Dashboard</h3>
-            <a href="/events/dashboard.php">Events</a>
-            <a href="/venues/dashboard.php">Venues</a>
-            <a href="/vendors/dashboard.php">Vendors</a>
-            <a href="/admin/dashboard.php" class="active">Admins</a>
+            <a href="<?= app_url('events/dashboard.php') ?>">Events</a>
+            <a href="<?= app_url('venues/dashboard.php') ?>">Venues</a>
+            <a href="<?= app_url('vendors/dashboard.php') ?>">Vendors</a>
+            <a href="<?= app_url('admin/dashboard.php') ?>" class="active">Admins</a>
         </aside>
 
         <main class="admin-main">
@@ -190,15 +190,15 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <a href="/admin/dashboard.php" class="btn-main" style="background:#6c757d;">
+                <a href="<?= app_url('admin/dashboard.php') ?>" class="btn-main" style="background:#6c757d;">
                     Home
                 </a>
 
-                <a href="/admin/add.php" class="btn-main">
+                <a href="<?= app_url('admin/add.php') ?>" class="btn-main">
                     + Add Admin
                 </a>
 
-                <form action="/admin/logout.php" method="post" style="margin:0;">
+                <form action="<?= app_url('admin/logout.php') ?>" method="post" style="margin:0;">
                     <button class="btn-main" style="background:#dc3545;">
                         Logout
                     </button>
@@ -224,8 +224,8 @@ $admins = $result->fetch_all(MYSQLI_ASSOC);
                                 <td><span class="status-badge">Active</span></td>
                                 <td>
                                     <div class="action-buttons">
-                                        <a href="/admin/edit.php?id=<?= $admin['id'] ?>" class="btn-sm btn-edit">Edit</a>
-                                        <a href="/admin/delete.php?id=<?= $admin['id'] ?>" class="btn-sm btn-delete">Delete</a>
+                                        <a href="<?= app_url('admin/edit.php') ?>?id=<?= $admin['id'] ?>" class="btn-sm btn-edit">Edit</a>
+                                        <a href="<?= app_url('admin/delete.php') ?>?id=<?= $admin['id'] ?>" class="btn-sm btn-delete">Delete</a>
                                     </div>
                                 </td>
                             </tr>

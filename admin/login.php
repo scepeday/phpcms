@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
 
-            header('Location: dashboard.php');
+            header('Location: ' . app_url('admin/dashboard.php'));
             exit;
         }
 
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="auth-link">
             Don't have an account?
-            <a href="/admin/register.php">Register</a>
+            <a href="<?= app_url('admin/register.php') ?>">Register</a>
         </div>
 
     </div>

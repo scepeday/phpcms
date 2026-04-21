@@ -3,12 +3,12 @@ $page_title = "Edit Admin";
 include '../includes/header.php';
 
 if (!isset($_SESSION['id'])) {
-    header('Location: /admin/login.php');
+    header('Location: ' . app_url('admin/login.php'));
     exit;
 }
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: /admin/dashboard.php');
+    header('Location: ' . app_url('admin/dashboard.php'));
     exit;
 }
 
@@ -26,7 +26,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
-    header('Location: /admin/dashboard.php');
+    header('Location: ' . app_url('admin/dashboard.php'));
     exit;
 }
 
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-4" style="max-width: 700px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Edit Admin</h1>
-        <a href="/admin/dashboard.php" class="btn btn-secondary">Back</a>
+        <a href="<?= app_url('admin/dashboard.php') ?>" class="btn btn-secondary">Back</a>
     </div>
 
     <?php if (!empty($errorMessage)): ?>

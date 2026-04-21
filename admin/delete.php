@@ -3,12 +3,12 @@ $page_title = "Delete Admin";
 include '../includes/header.php';
 
 if (!isset($_SESSION['id'])) {
-    header('Location: /admin/login.php');
+    header('Location: ' . app_url('admin/login.php'));
     exit;
 }
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header('Location: /admin/dashboard.php');
+    header('Location: ' . app_url('admin/dashboard.php'));
     exit;
 }
 
@@ -25,7 +25,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 
 if (!$user) {
-    header('Location: /admin/dashboard.php');
+    header('Location: ' . app_url('admin/dashboard.php'));
     exit;
 }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($deleteStmt->execute()) {
         $deleteStmt->close();
-        header('Location: /admin/dashboard.php');
+        header('Location: ' . app_url('admin/dashboard.php'));
         exit;
     } else {
         $errorMessage = 'Error deleting admin';
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container mt-4" style="max-width: 700px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Delete Admin</h1>
-        <a href="/admin/dashboard.php" class="btn btn-secondary">Back</a>
+        <a href="<?= app_url('admin/dashboard.php') ?>" class="btn btn-secondary">Back</a>
     </div>
 
     <?php if (!empty($errorMessage)): ?>
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form action="" method="post" class="d-flex gap-2">
             <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <a href="/admin/dashboard.php" class="btn btn-outline-secondary">Cancel</a>
+            <a href="<?= app_url('admin/dashboard.php') ?>" class="btn btn-outline-secondary">Cancel</a>
         </form>
     </div>
 </div>

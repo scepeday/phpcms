@@ -132,7 +132,7 @@ if (isset($_POST['register'])) {
 
         <div class="auth-link">
             Already have an account?
-            <a href="/admin/login.php">Login</a>
+            <a href="<?= app_url('admin/login.php') ?>">Login</a>
         </div>
 
     </div>
