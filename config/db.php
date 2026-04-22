@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'eventhub-db';
+$dbname = 'event-db';
 $user = 'root';
 $password = 'root';
 $port = 8888;
