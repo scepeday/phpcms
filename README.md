@@ -31,3 +31,20 @@ add admin account
 view accounts
 update accounts
 delete accounts
+
+Steps to start :-
+
+1. Start with the URL - http://localhost:8888/admin/login.php
+2. Enter admin email and password 
+email: admin@admin.com
+password: admin
+
+
+
+
+
+
+
+
+
+
